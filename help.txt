@@ -1,0 +1,40 @@
+
+nombreEmpresa="platzy"
+pathReport=r"C:\Users\Mayra\Desktop\reportes"
+userData="exikhan"
+passData="exikhan"
+cadenaConexion="Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com;Initial*Catalog=TMS_Alpha"        
+ 
+ReportBot(
+        nombreEmpresa,
+        pathReport,
+        userData,
+        passData,
+        cadenaConexion.replace("*"," ")
+        )
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Reporte")
+    parser.add_argument("nombreEmpresa", type=str, help="nombreEmpresa")
+    parser.add_argument("pathReport", type=str, help="pathReport")
+    parser.add_argument("userData", type=str, help="userData")
+    parser.add_argument("passData", type=str, help="passData")
+    parser.add_argument("cadenaConexion", type=str, help="cadenaConexion")
+    parser.add_argument("catalogo", type=str, help="catalogo")
+    args = parser.parse_args()
+    ReportBot(
+        args.nombreEmpresa,
+        args.pathReport,
+        args.userData,
+        args.passData,
+        args.cadenaConexion.replace("*"," ")+';'+args.catalogo.replace("*"," ")
+        )
+
+
+
+python holaMundo.py platzy C:\Users\Mayra\Desktop\reportes exikhan exikhan Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com Initial*Catalog=TMS_Alpha dir_cookies
+
+holaMundo.exe platzy C:\Users\Mayra\Desktop\reportes exikhan exikhan Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com Initial*Catalog=TMS_Alpha
+
+pyinstaller --hidden-import=selenium --hidden-import=selenium.webdriver --hidden-import=selenium.webdriver.common --hidden-import=selenium.webdriver.edge --hidden-import=selenium.webdriver.edge.options --hidden-import=selenium.webdriver.common.by --hidden-import=chromedriver_autoinstaller reporteBot.py
+https://www.python.org/downloads/release/python-3112/

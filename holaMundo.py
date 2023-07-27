@@ -9,8 +9,7 @@ import argparse
 
 
 class ReportBot:
-    def __init__(self,nombreEmpresa:str,pathReport,userData:str,passData:str,cadenaConexion:str):
-        dir_cookies=r'C:\Users\Mayra\Desktop\developer\whatsbot\user-data\user-data'
+    def __init__(self,nombreEmpresa:str,pathReport,userData:str,passData:str,cadenaConexion:str,dir_cookies:str):
         options=Options()
         options.add_argument('--remote-debugging-port=9222')
         options.add_argument('--user-data-dir={}'.format(dir_cookies))    
@@ -107,11 +106,13 @@ if __name__ == "__main__":
     parser.add_argument("passData", type=str, help="passData")
     parser.add_argument("cadenaConexion", type=str, help="cadenaConexion")
     parser.add_argument("catalogo", type=str, help="catalogo")
+    parser.add_argument("dir_cookies", type=str, help="dir_cookies")
     args = parser.parse_args()
     ReportBot(
         args.nombreEmpresa,
         args.pathReport,
         args.userData,
         args.passData,
-        args.cadenaConexion.replace("*"," ")+';'+args.catalogo.replace("*"," ")
+        args.cadenaConexion.replace("*"," ")+';'+args.catalogo.replace("*"," "),
+        args.dir_cookies
         )
