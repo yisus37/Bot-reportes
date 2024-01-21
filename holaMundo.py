@@ -9,33 +9,80 @@ import argparse
 
 
 class ReportBot:
-    def __init__(self,nombreEmpresa:str,pathReport,userData:str,passData:str,cadenaConexion:str,dir_cookies:str):
+    def __init__(self):
         options=Options()
         options.add_argument('--remote-debugging-port=9222')
-        options.add_argument('--user-data-dir={}'.format(dir_cookies))    
+        options.add_argument('--user-data-dir={}'.format(r'C:\Users\Administrador\Desktop\proyectos\Bot-reportes\user-data-dir'))   
         self.drive=webdriver.Edge(options=options)
         self.drive.get('http://reports.exikhan.com.mx/Reports')
         
-        self.nombreEmpresa=nombreEmpresa
-        self.pathReport=pathReport
-        self.userData=userData
-        self.passData=passData
-        self.cadenaConexion=cadenaConexion
-        self.nombreData=f"DataSource_{nombreEmpresa}"
+        self.nombreEmpresa=""
+        self.pathReport=r'C:\Users\Administrador\Desktop\proyectos\Bot-reportes\reportes'
+        self.userData=""
+        self.passData=""
+        self.cadenaConexion=""
+        self.nombreData=""
         
         time.sleep(2)
         self.authenticarse()
         time.sleep(5)
-        self.crearCarpetas()
-        time.sleep(1)
-        self.crearData()
-        self.uploadReport()
-        self.data_report()
+        self.procesos()
+
         
         
     def authenticarse(self):
         subprocess.Popen('login.exe')
+
+    def archivo_tiene_contenido(self,nombre_archivo):
+        try:
+            with open(nombre_archivo, 'r') as archivo:
+                contenido = archivo.read()
+                if contenido.strip():
+                    contenido=contenido.split("/")
+                    self.nombreEmpresa=contenido[0]
+                    self.nombreData=f"DataSource_{contenido[0]}"
+                    self.userData=contenido[1]
+                    self.passData=contenido[2]
+                    self.cadenaConexion=contenido[3].replace("*"," ")+';'+contenido[4].replace("*"," ").strip()
+                    return True
+                else:
+                    return False
+        except FileNotFoundError:
+            return False
         
+    def eliminar_textoArchivo(self,nombre_archivo):
+        with open(nombre_archivo, 'w') as archivo:
+            archivo.write("") 
+
+    def isActive_navegador(self):
+        time.sleep(2)
+        self.drive.refresh()
+        try:
+            self.drive.find_element(by=By.ID,value="S_searchTextBoxID")
+        except:
+            self.authenticarse()
+            time.sleep(2)
+
+
+
+    def procesos(self):
+        while True:
+            nombreArchivo="newEmpresa.txt"
+            isContent=self.archivo_tiene_contenido(nombreArchivo)
+            if isContent:
+                self.isActive_navegador()
+                self.eliminar_textoArchivo(nombreArchivo)
+                time.sleep(1)
+                self.crearCarpetas()
+                time.sleep(1)
+                self.crearData()
+                self.uploadReport()
+                self.data_report()
+                time.sleep(2)
+                self.drive.find_element(by=By.LINK_TEXT,value="Inicio").click()
+                time.sleep(60)
+
+
     def uploadReport(self):
         self.drive.find_element(by=By.LINK_TEXT,value=self.nombreEmpresa).click()
         time.sleep(1)
@@ -51,10 +98,8 @@ class ReportBot:
             time.sleep(1)
         
     def data_report(self):
-        """ self.drive.find_element(by=By.XPATH,value=f"//a[@title='udemy']").click()
-        time.sleep(1) """
         elementos=self.drive.find_elements(by=By.CLASS_NAME,value="msrs-UnSelectedItem")
-        """ print(len(elementos)) """
+
         for i,e in enumerate(elementos):
             self.drive.find_element(by=By.XPATH,value=f"//*[@id='ui_a{i}']/tbody/tr/td[3]").click()
             self.drive.find_element(by=By.XPATH,value="//span[@class='msrs-menuItemLabelContainer' and text()='Administrar']").click()
@@ -84,7 +129,7 @@ class ReportBot:
         self.drive.find_element(by=By.XPATH,value="//input[@id='ui_txtChooseName']").send_keys(self.nombreData)
         self.drive.find_element(by=By.ID,value="ui_txtConnectionString").send_keys(self.cadenaConexion)
         self.drive.find_element(by=By.ID,value="ui_rdoStored").click()
-        self.drive.find_element(by=By.ID,value="ui_txtStoredName").send_keys(self.nombreData)
+        self.drive.find_element(by=By.ID,value="ui_txtStoredName").send_keys(self.userData)
         self.drive.find_element(by=By.ID,value="ui_txtStoredPwd").send_keys(self.passData)
         self.drive.find_element(by=By.ID,value="ui_btnSave").click()
         self.drive.find_element(by=By.LINK_TEXT,value="Inicio").click()
@@ -92,27 +137,12 @@ class ReportBot:
 
         
     def newCarpetas(self,nombre:str):
-        self.drive.find_element(by=By.XPATH,value="//*[@id='ui_form']/span/table/tbody/tr[2]/td/table/tbody/tr/td/span/table/tbody/tr/td/span/span/table/tbody/tr[2]/td/table/tbody/tr/td[2]").click()
+        self.drive.find_element(by=By.ID,value="ui_btnNewFold").click()
+
         inpNom=self.drive.find_element(by=By.XPATH,value="//*[@id='ui_txtChooseName']")
         inpNom.clear()
         inpNom.send_keys(nombre)
         self.drive.find_element(by=By.XPATH,value="//*[@id='ui_btnSave']").click()
         
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Reporte")
-    parser.add_argument("nombreEmpresa", type=str, help="nombreEmpresa")
-    parser.add_argument("pathReport", type=str, help="pathReport")
-    parser.add_argument("userData", type=str, help="userData")
-    parser.add_argument("passData", type=str, help="passData")
-    parser.add_argument("cadenaConexion", type=str, help="cadenaConexion")
-    parser.add_argument("catalogo", type=str, help="catalogo")
-    parser.add_argument("dir_cookies", type=str, help="dir_cookies")
-    args = parser.parse_args()
-    ReportBot(
-        args.nombreEmpresa,
-        args.pathReport,
-        args.userData,
-        args.passData,
-        args.cadenaConexion.replace("*"," ")+';'+args.catalogo.replace("*"," "),
-        args.dir_cookies
-        )
+
+ReportBot()

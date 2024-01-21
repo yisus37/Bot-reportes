@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
 
 
-python holaMundo.py platzy C:\Users\Mayra\Desktop\reportes exikhan exikhan Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com Initial*Catalog=TMS_Alpha dir_cookies
+python holaMundo.py platzy C:\Users\Administrador\Desktop\proyectos\Bot-reportes\reportes exikhan exikhan Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com Initial*Catalog=TMS_Alpha 
 
 holaMundo.exe platzy C:\Users\Mayra\Desktop\reportes exikhan exikhan Data*Source=clientes-tms.cjbabeh3pcx8.us-east-1.rds.amazonaws.com Initial*Catalog=TMS_Alpha
 

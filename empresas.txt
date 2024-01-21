@@ -1,0 +1,12 @@
+prueba/exiclientes/gnerorne/Server=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com;/initial Catalog=TMS_Alpha; 
+totam/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=chgklgzlps 
+mariobros/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=sxvmvdskto 
+marco/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=vxbteablgg 
+totam/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=jxvackrute 
+marco/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=hyxqetyjvl 
+nintendo/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=itollcvbgo 
+testfrancisco/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=akyrxaggdj 
+espanol/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=ebubtlycvf 
+testfrancisco/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=akyrxaggdj 
+sna/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=njtfwqemih 
+electrica/exiclientes/gnerorne/Data*Source=database-tms-clientes.cjbabeh3pcx8.us-east-1.rds.amazonaws.com/Initial*Catalog=cnrfebiozj 
